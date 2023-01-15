@@ -101,11 +101,12 @@ impl SudokuBoard {
     /// Calulates all possible values that can be in cell.
     fn calculate_cell_options(&mut self, i: usize) -> Vec<i32> {       
         let mut options = vec![];        
+        let c = &self.board[i];
         for v in 1..(self.square_size*self.square_size+1) {
             // if the value doesn't exist in the row, column or square - then it is an option
-            if self.get_all_values_in_row(&self.board[i]).iter().any(|x| *x == v) || 
-                self.get_all_values_in_col(&self.board[i]).iter().any(|x| *x == v) ||
-                self.get_all_values_in_square(&self.board[i]).iter().any(|x| *x == v) {
+            if self.get_all_values_in_row(c).iter().any(|x| *x == v) || 
+                self.get_all_values_in_col(c).iter().any(|x| *x == v) ||
+                self.get_all_values_in_square(c).iter().any(|x| *x == v) {
                 continue;
             } 
             options.push(v);
